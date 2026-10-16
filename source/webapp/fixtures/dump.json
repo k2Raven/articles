@@ -1,0 +1,86 @@
+[
+{
+  "model": "webapp.article",
+  "pk": 2,
+  "fields": {
+    "title": "Title 2",
+    "content": "Content 2",
+    "author": "Anonymous",
+    "created_at": "2026-10-16T14:23:23.526Z",
+    "updated_at": "2026-10-16T14:23:23.526Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 3,
+  "fields": {
+    "title": "Title 3",
+    "content": "qwe qwe qwe",
+    "author": "Author 123",
+    "created_at": "2026-10-16T14:26:22.710Z",
+    "updated_at": "2026-10-16T14:26:22.710Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 4,
+  "fields": {
+    "title": "New Title 1",
+    "content": "Content 1",
+    "author": "Anonymous",
+    "created_at": "2026-10-16T14:36:06.699Z",
+    "updated_at": "2026-10-16T14:36:06.699Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 5,
+  "fields": {
+    "title": "qwe",
+    "content": "qwe",
+    "author": "Anonymous",
+    "created_at": "2026-10-16T14:43:43.659Z",
+    "updated_at": "2026-10-16T14:43:43.659Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 6,
+  "fields": {
+    "title": "qwe",
+    "content": "qwe",
+    "author": "qwe",
+    "created_at": "2026-10-16T15:07:33.312Z",
+    "updated_at": "2026-10-16T15:07:33.312Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 7,
+  "fields": {
+    "title": "123",
+    "content": "qwe",
+    "author": "123",
+    "created_at": "2026-10-16T15:07:47.825Z",
+    "updated_at": "2026-10-16T15:07:47.825Z"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$KBRjOk5Wf5XDBodByFPfdu$uli8gt8tHnmBr7aivWG0Ymwtd3nop3BujZZBOIgWLJQ=",
+    "last_login": "2026-10-16T14:40:50.842Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-10-16T14:39:46.248Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
