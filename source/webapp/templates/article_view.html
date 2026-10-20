@@ -1,20 +1,20 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Article view</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Article{% endblock %}
+
+{% block content %}
+
+
 
 <h1>Article</h1>
 
-<h2>Title: {{ article.title }}</h2>
-<p>content: {{ article.content }}</p>
 
-<p>author: {{ article.author }}</p>
 
-</body>
-</html>
+<div class="card" >
+  <div class="card-body">
+    <h3 class="mt-2 mb-0 ">Title: {{ article.title }}</h3>
+    <p class="card-text fg-1">content: {{ article.content }}</p>
+    <small class="fg-2">author: {{ article.author }}</small>
+  </div>
+</div>
+{% endblock %}

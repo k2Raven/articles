@@ -1,25 +1,24 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-<h1>Articles</h1>
+{% extends 'base.html' %}
 
-{% for article in articles %}
-    <div>
+{% block content %}
+    <h1>Articles</h1>
 
-     <h1>{{ article.title }} (id: {{ article.id }})</h1>
-     <p>Author: {{ article.author }}</p>
-    <a href="article/?id={{ article.id }}">Подробнее</a>
+    <div class="row row-cols-3">
+
+        {% for article in articles %}
+            <div class="col mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        Author: {{ article.author }}
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ article.title }}</h4>
+                        <a href="{% url 'article_view' article.pk %}" class="btn-solid theme-primary">Подробнее</a>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
     </div>
-{% endfor %}
 
-<p>
-    <a href="articles/add/">create article</a>
-</p>
-</body>
-</html>
+{% endblock %}
