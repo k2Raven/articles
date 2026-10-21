@@ -26,3 +26,9 @@ def article_create_view(request):
         article = Article.objects.create(title=title, content=content, author=author)
         # return render(request, 'article_view.html', {'article': article})
         return redirect('/')
+
+def article_delete_view(request):
+    article_id = request.GET.get('id')
+    article = Article.objects.get(id=article_id)
+    article.delete()
+    return redirect('/')

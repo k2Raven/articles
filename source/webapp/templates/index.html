@@ -12,9 +12,11 @@
 {% for article in articles %}
     <div>
 
-     <h1>{{ article.title }} (id: {{ article.id }})</h1>
-     <p>Author: {{ article.author }}</p>
-    <a href="article/?id={{ article.id }}">Подробнее</a>
+        <h1>{{ article.title }} (id: {{ article.id }})</h1>
+        <p>Author: {{ article.author }}</p>
+        <p><a href="article/?id={{ article.id }}">Подробнее</a></p>
+        <p><a href="article/delete/?id={{ article.id }}">Удалить статью</a></p>
+
     </div>
 {% endfor %}
 
