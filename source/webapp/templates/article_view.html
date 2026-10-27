@@ -6,15 +6,22 @@
 
 
 
-<h1>Article</h1>
+    <h1>Article</h1>
 
 
 
-<div class="card" >
-  <div class="card-body">
-    <h3 class="mt-2 mb-0 ">Title: {{ article.title }}</h3>
-    <p class="card-text fg-1">content: {{ article.content }}</p>
-    <small class="fg-2">author: {{ article.author }}</small>
-  </div>
-</div>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="mt-2 mb-0 ">Title: {{ article.title }}</h3>
+            <p class="card-text fg-1">content: {{ article.content }}</p>
+            <small class="fg-2">author: {{ article.author }}</small>
+            <div>
+                <a role="button" href="{% url 'article_update' article.pk %}"
+                   class="btn-solid theme-success">Обновить</a>
+                <a role="button"
+                   href="{% url 'article_delete' article.pk %}"
+                   class="btn-solid theme-danger">Удалить</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

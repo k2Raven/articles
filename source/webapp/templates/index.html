@@ -13,7 +13,14 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title">{{ article.title }}</h4>
-                        <a href="{% url 'article_view' article.pk %}" class="btn-solid theme-primary">Подробнее</a>
+                        <div>
+                            <a href="{% url 'article_view' article.pk %}" class="btn-solid theme-primary">Подробнее</a>
+                            <a role="button" href="{% url 'article_update' article.pk %}"
+                               class="btn-solid theme-success">Обновить</a>
+                            <a role="button"
+                               href="{% url 'article_delete' article.pk %}"
+                               class="btn-solid theme-danger">Удалить</a>
+                        </div>
                     </div>
                 </div>
 
