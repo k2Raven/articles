@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Article delete{% endblock %}
+
+{% block content %}
+
+
+
+    <h1>Удаление статьи</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <p>Вы действительно хотите удалить статью "{{ article.title }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Да</button>
+            </form>
+            <a href="{% url 'article_view' article.pk %}">Нет</a>
+        </div>
+    </div>
+{% endblock %}
