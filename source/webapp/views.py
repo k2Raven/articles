@@ -30,10 +30,7 @@ def article_create_view(request):
     elif request.method == 'POST':
         form = ArticleForm(data= request.POST)
         if form.is_valid():
-            title = form.cleaned_data.get('title')
-            content = form.cleaned_data.get('content')
-            author = form.cleaned_data.get('author')
-            article = Article.objects.create(title=title, content=content, author=author)
+            article = form.save()
             return redirect('article_view', pk=article.id)
         else:
             return render(request, 'create_article.html', {'form': form})
@@ -42,15 +39,12 @@ def article_create_view(request):
 def article_update_view(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'GET':
-        form = ArticleForm(initial={'title': article.title, 'content': article.content, 'author': article.author})
+        form = ArticleForm(instance=article)
         return render(request, 'update_article.html', {'article': article, 'form': form})
     elif request.method == 'POST':
-        form = ArticleForm(data=request.POST)
+        form = ArticleForm(data=request.POST, instance=article)
         if form.is_valid():
-            article.title = form.cleaned_data.get('title')
-            article.content = form.cleaned_data.get('content')
-            article.author = form.cleaned_data.get('author')
-            article.save()
+            form.save()
             return redirect('article_view', pk=article.id)
         else:
             return render(request, 'update_article.html', {'article': article, 'form': form})
