@@ -1,24 +1,31 @@
+from typing import Any
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.views.generic import View, TemplateView
 
 from webapp.forms import ArticleForm
 from  webapp.models import Article
-from django.http import HttpResponseRedirect, HttpResponseNotFound, Http404
 
-def index_view(request):
-    context = {
-        'articles': Article.objects.all()
-    }
-    return render(request, 'index.html', context)
 
-def article_view(request, pk):
-    # try:
-    #     article = Article.objects.get(pk=pk)
-    # except Article.DoesNotExist:
-    #     # return HttpResponseNotFound('Article not found')
-    #     raise Http404('Article not found')
-    article = get_object_or_404(Article, pk=pk)
-    return render(request, 'article_view.html', {'article': article})
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            'articles': Article.objects.all()
+        }
+        return render(request, 'index.html', context)
+
+
+# class AboutView(TemplateView):
+#     template_name = 'about.html'
+
+class ArticleView(TemplateView):
+    template_name = 'article_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article'] = get_object_or_404(Article, pk=kwargs.get('pk'))
+        return context
+
 
 
 
