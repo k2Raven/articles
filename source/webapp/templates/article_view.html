@@ -14,6 +14,7 @@
         <div class="card-body">
             <h3 class="mt-2 mb-0 ">Title: {{ article.title }}</h3>
             <p class="card-text fg-1">content: {{ article.content }}</p>
+            <p class="card-text fg-1">Tags: {% for tag in article.tags.all %}{{ tag.name }} {% if not forloop.last %},{% endif %} {% endfor %}</p>
             <small class="fg-2">author: {{ article.author }}</small>
             <div>
                 <a role="button" href="{% url 'article_update' article.pk %}"

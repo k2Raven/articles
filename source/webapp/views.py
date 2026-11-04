@@ -1,10 +1,8 @@
-from typing import Any
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View, TemplateView
 
 from webapp.forms import ArticleForm
-from  webapp.models import Article
+from webapp.models import Article
 
 
 class IndexView(View):
@@ -27,20 +25,19 @@ class ArticleView(TemplateView):
         return context
 
 
-
-
 def article_create_view(request):
-
     if request.method == 'GET':
         form = ArticleForm()
         return render(request, 'create_article.html', {'form': form})
     elif request.method == 'POST':
-        form = ArticleForm(data= request.POST)
+        form = ArticleForm(data=request.POST)
         if form.is_valid():
             title = form.cleaned_data.get('title')
             content = form.cleaned_data.get('content')
             author = form.cleaned_data.get('author')
+            tags = form.cleaned_data.get('tags')
             article = Article.objects.create(title=title, content=content, author=author)
+            article.tags.set(tags)
             return redirect('article_view', pk=article.id)
         else:
             return render(request, 'create_article.html', {'form': form})
@@ -49,7 +46,8 @@ def article_create_view(request):
 def article_update_view(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'GET':
-        form = ArticleForm(initial={'title': article.title, 'content': article.content, 'author': article.author})
+        form = ArticleForm(initial={'title': article.title, 'content': article.content, 'author': article.author,
+                                    'tags': article.tags.all()})
         return render(request, 'update_article.html', {'article': article, 'form': form})
     elif request.method == 'POST':
         form = ArticleForm(data=request.POST)
@@ -57,11 +55,11 @@ def article_update_view(request, pk):
             article.title = form.cleaned_data.get('title')
             article.content = form.cleaned_data.get('content')
             article.author = form.cleaned_data.get('author')
+            article.tags.set(form.cleaned_data.get('tags'))
             article.save()
             return redirect('article_view', pk=article.id)
         else:
             return render(request, 'update_article.html', {'article': article, 'form': form})
-
 
 
 def article_delete_view(request, pk):
