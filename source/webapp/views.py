@@ -2,7 +2,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View, TemplateView
 
 from webapp.forms import ArticleForm
-from webapp.models import Article
+from webapp.models import Article, Status
+
+
+class ArticlesStatusView(View):
+    def get(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        status = get_object_or_404(Status, slug=slug)
+        context = {
+            'articles': Article.objects.filter(status=status),
+        }
+        return render(request, 'index.html', context)
 
 
 class IndexView(View):

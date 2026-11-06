@@ -1,13 +1,21 @@
 from django.db import models
+from slugify import slugify
 
 
 class Status(models.Model):
     title = models.CharField(max_length=20, unique=True, null=False, blank=False, verbose_name='Название')
+    slug = models.SlugField(max_length=20, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 
     def __str__(self):
         return f'{self.pk} - {self.title}'
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
 
 
 class Article(models.Model):
