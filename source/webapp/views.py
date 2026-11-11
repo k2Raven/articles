@@ -1,11 +1,12 @@
 from urllib.parse import urlencode
 
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from webapp.forms import ArticleForm, SimpleSearchForm
-from webapp.models import Article
+from webapp.forms import ArticleForm, SimpleSearchForm, CommentForm
+from webapp.models import Article, Comment
 
 
 class IndexView(ListView):
@@ -79,5 +80,16 @@ class ArticleDeleteView(DeleteView):
     model = Article
     success_url = reverse_lazy('article_list')
 
-    # def get(self, *args, **kwargs):
-    #     return self.delete(*args, **kwargs)
+
+class CommentCreateView(CreateView):
+    template_name = 'create_comment.html'
+    model = Comment
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
+        form.instance.article = article
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('article_view', kwargs={'pk': self.object.article.pk})

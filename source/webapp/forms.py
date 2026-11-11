@@ -1,8 +1,7 @@
 from django import forms
 from django.forms import widgets
-from webapp.validators import at_last_10, MinLengthValidator
 
-from webapp.models import Article
+from webapp.models import Article, Comment
 
 
 class ArticleForm(forms.ModelForm):
@@ -14,3 +13,8 @@ class ArticleForm(forms.ModelForm):
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False,
                              widget=widgets.TextInput(attrs={'class': 'form-control me-2'}), label='Найти')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text', 'author']

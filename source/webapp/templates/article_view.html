@@ -25,7 +25,8 @@
         </div>
     </div>
 
-    <h3>Comments</h3>
+    <h3 class="my-4">Comments</h3>
+    <a role="button" href="{% url 'comment_create' article.pk %}" class="btn-solid theme-primary my-3">Add Comment</a>
 
     <div class="row  row-cols-3">
     {% for comment in comments %}
