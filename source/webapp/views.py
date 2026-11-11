@@ -50,6 +50,11 @@ class ArticleView(DetailView):
     template_name = 'article_view.html'
     model = Article
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.object.comments.order_by('-created_at')
+        return context
+
 
 class ArticleCreateView(CreateView):
     template_name = 'create_article.html'
