@@ -1,11 +1,11 @@
 <nav aria-label="Pagination">
     <ul class="pagination">
         <li class="page-item {% if page_obj.number == 1 %}disabled{% endif %}">
-            <a href="?page=1" class="page-link">В начало</a>
+            <a href="?{% if query %}{{ query }}&{% endif %}page=1" class="page-link">В начало</a>
         </li>
 
         <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-            <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"
+            <a href="{% if page_obj.has_previous %}?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}{% endif %}"
                class="page-link">Назад</a>
         </li>
 
@@ -16,6 +16,7 @@
 
                     <span class="input-group-text rounded-0" id="basic-addon1">Страница </span>
                     <input type="text" class="form-control" name="page" value="{{ page_obj.number }}" aria-label="page">
+                    {% if search %}<input type="hidden" name="search" value="{{ search }}">{% endif %}
                     <span class="input-group-text rounded-0"
                           id="basic-addon2">из {{ page_obj.paginator.num_pages }}.</span>
                 </div>
@@ -24,11 +25,11 @@
 
 
         <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-            <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}"
+            <a href="{% if page_obj.has_next %}?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}{% endif %}"
                class="page-link">Далее</a>
         </li>
         <li class="page-item  {% if page_obj.number == page_obj.paginator.num_pages %}disabled{% endif %}"><a
-                class="page-link" href="?page={{ page_obj.paginator.num_pages }}">В конец</a></li>
+                class="page-link" href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}">В конец</a></li>
     </ul>
 </nav>
 
