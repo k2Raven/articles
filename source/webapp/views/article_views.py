@@ -1,21 +1,20 @@
 from urllib.parse import urlencode
 
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from webapp.forms import ArticleForm, SimpleSearchForm, CommentForm
-from webapp.models import Article, Comment
+from webapp.forms import ArticleForm, SimpleSearchForm
+from webapp.models import Article
 
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'article/index.html'
     context_object_name = 'articles'
     model = Article
     ordering = ['-created_at']
     paginate_by = 3
-    # paginate_orphans = 3
+    paginate_orphans = 3
 
     def get_search_form(self):
         return SimpleSearchForm(self.request.GET)
@@ -48,7 +47,7 @@ class IndexView(ListView):
         return queryset
 
 class ArticleView(DetailView):
-    template_name = 'article_view.html'
+    template_name = 'article/view.html'
     model = Article
 
     def get_context_data(self, **kwargs):
@@ -58,7 +57,7 @@ class ArticleView(DetailView):
 
 
 class ArticleCreateView(CreateView):
-    template_name = 'create_article.html'
+    template_name = 'article/create.html'
     model = Article
     form_class = ArticleForm
 
@@ -67,7 +66,7 @@ class ArticleCreateView(CreateView):
 
 
 class ArticleUpdateView(UpdateView):
-    template_name = 'update_article.html'
+    template_name = 'article/update.html'
     model = Article
     form_class = ArticleForm
 
@@ -76,37 +75,6 @@ class ArticleUpdateView(UpdateView):
 
 
 class ArticleDeleteView(DeleteView):
-    template_name = 'delete_article.html'
+    template_name = 'article/delete.html'
     model = Article
     success_url = reverse_lazy('article_list')
-
-
-class CommentCreateView(CreateView):
-    template_name = 'create_comment.html'
-    model = Comment
-    form_class = CommentForm
-
-    def form_valid(self, form):
-        article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
-        form.instance.article = article
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('article_view', kwargs={'pk': self.object.article.pk})
-
-
-class CommentUpdateView(UpdateView):
-    template_name = 'update_comment.html'
-    model = Comment
-    form_class = CommentForm
-
-    def get_success_url(self):
-        return reverse('article_view', kwargs={'pk': self.object.article.pk})
-
-
-class CommentDeleteView(DeleteView):
-    template_name = 'delete_comment.html'
-    model = Comment
-
-    def get_success_url(self):
-        return reverse('article_view', kwargs={'pk': self.object.article.pk})
