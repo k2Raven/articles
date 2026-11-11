@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Comment delete{% endblock %}
+
+{% block content %}
+
+
+
+    <h1>Удаление комментария</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <p>Вы действительно хотите удалить комментарий "{{ comment.text }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Да</button>
+            </form>
+            <a href="{% url 'article_view' comment.article.pk %}">Нет</a>
+        </div>
+    </div>
+{% endblock %}

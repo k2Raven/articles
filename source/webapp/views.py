@@ -93,3 +93,20 @@ class CommentCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('article_view', kwargs={'pk': self.object.article.pk})
+
+
+class CommentUpdateView(UpdateView):
+    template_name = 'update_comment.html'
+    model = Comment
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse('article_view', kwargs={'pk': self.object.article.pk})
+
+
+class CommentDeleteView(DeleteView):
+    template_name = 'delete_comment.html'
+    model = Comment
+
+    def get_success_url(self):
+        return reverse('article_view', kwargs={'pk': self.object.article.pk})
