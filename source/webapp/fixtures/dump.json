@@ -5,6 +5,7 @@
   "fields": {
     "title": "Title 2",
     "content": "Content 2",
+    "status": null,
     "author": "Anonymous",
     "created_at": "2026-10-16T14:23:23.526Z",
     "updated_at": "2026-10-16T14:23:23.526Z"
@@ -16,6 +17,7 @@
   "fields": {
     "title": "Title 3",
     "content": "qwe qwe qwe",
+    "status": null,
     "author": "Author 123",
     "created_at": "2026-10-16T14:26:22.710Z",
     "updated_at": "2026-10-16T14:26:22.710Z"
@@ -27,6 +29,7 @@
   "fields": {
     "title": "New Title 1",
     "content": "Content 1",
+    "status": null,
     "author": "Anonymous",
     "created_at": "2026-10-16T14:36:06.699Z",
     "updated_at": "2026-10-16T14:36:06.699Z"
@@ -38,6 +41,7 @@
   "fields": {
     "title": "qwe",
     "content": "qwe",
+    "status": null,
     "author": "Anonymous",
     "created_at": "2026-10-16T14:43:43.659Z",
     "updated_at": "2026-10-16T14:43:43.659Z"
@@ -49,6 +53,7 @@
   "fields": {
     "title": "qwe",
     "content": "qwe",
+    "status": null,
     "author": "qwe",
     "created_at": "2026-10-16T15:07:33.312Z",
     "updated_at": "2026-10-16T15:07:33.312Z"
@@ -60,27 +65,65 @@
   "fields": {
     "title": "123",
     "content": "qwe",
+    "status": null,
     "author": "123",
     "created_at": "2026-10-16T15:07:47.825Z",
     "updated_at": "2026-10-16T15:07:47.825Z"
   }
 },
 {
-  "model": "auth.user",
+  "model": "webapp.article",
+  "pk": 8,
+  "fields": {
+    "title": "qwqweqweqweq",
+    "content": "qwe",
+    "status": null,
+    "author": "qwqweqweqw",
+    "created_at": "2026-11-06T13:39:29.458Z",
+    "updated_at": "2026-11-06T13:39:29.458Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 9,
+  "fields": {
+    "title": "qweqweewrwerwer",
+    "content": "qw",
+    "status": null,
+    "author": "qweqweqwe",
+    "created_at": "2026-11-06T13:39:55.266Z",
+    "updated_at": "2026-11-06T13:39:55.266Z"
+  }
+},
+{
+  "model": "webapp.comment",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$1500000$KBRjOk5Wf5XDBodByFPfdu$uli8gt8tHnmBr7aivWG0Ymwtd3nop3BujZZBOIgWLJQ=",
-    "last_login": "2026-10-16T14:40:50.842Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2026-10-16T14:39:46.248Z",
-    "groups": [],
-    "user_permissions": []
+    "article": 9,
+    "text": "test test test test",
+    "author": "Anonymous",
+    "created_at": "2026-11-11T14:39:15.797Z",
+    "updated_at": "2026-11-11T14:39:15.797Z"
+  }
+},
+{
+  "model": "webapp.comment",
+  "pk": 2,
+  "fields": {
+    "article": 9,
+    "text": "qw qw wqe qwe qw qwe qweqwe",
+    "author": "Anonymous",
+    "created_at": "2026-11-11T14:42:48.341Z",
+    "updated_at": "2026-11-11T14:42:48.341Z"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 1,
+  "fields": {
+    "title": "test 123",
+    "created_at": "2026-11-06T13:46:19.051Z",
+    "updated_at": "2026-11-06T13:46:19.051Z"
   }
 }
 ]
