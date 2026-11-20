@@ -2,6 +2,8 @@ from django.urls import path
 from webapp.views import IndexView, ArticleCreateView, ArticleView, ArticleUpdateView, ArticleDeleteView, \
     CommentCreateView, CommentUpdateView, CommentDeleteView
 
+app_name = 'webapp'
+
 urlpatterns = [
     path('', IndexView.as_view(), name='article_list'),
     path('article/add/', ArticleCreateView.as_view(), name='article_create'),

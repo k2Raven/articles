@@ -63,7 +63,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     form_class = ArticleForm
 
     def get_success_url(self):
-        return reverse('article_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:article_view', kwargs={'pk': self.object.pk})
 
 
 class ArticleUpdateView(UpdateView):
@@ -72,10 +72,10 @@ class ArticleUpdateView(UpdateView):
     form_class = ArticleForm
 
     def get_success_url(self):
-        return reverse('article_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:article_view', kwargs={'pk': self.object.pk})
 
 
 class ArticleDeleteView(DeleteView):
     template_name = 'article/delete.html'
     model = Article
-    success_url = reverse_lazy('article_list')
+    success_url = reverse_lazy('webapp:article_list')

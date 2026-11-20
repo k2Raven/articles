@@ -15,7 +15,7 @@
                 {% csrf_token %}
                 <button type="submit">Да</button>
             </form>
-            <a href="{% url 'article_view' comment.article.pk %}">Нет</a>
+            <a href="{% url 'webapp:article_view' comment.article.pk %}">Нет</a>
         </div>
     </div>
 {% endblock %}

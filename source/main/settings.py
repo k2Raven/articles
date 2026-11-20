@@ -128,5 +128,5 @@ MAILERS = {
     },
 }
 
-LOGIN_REDIRECT_URL = 'article_list'
-LOGOUT_REDIRECT_URL = 'article_list'
+LOGIN_REDIRECT_URL = 'webapp:article_list'
+LOGOUT_REDIRECT_URL = 'webapp:article_list'

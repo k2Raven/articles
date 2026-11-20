@@ -24,11 +24,11 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ article.title }}</h4>
                         <div>
-                            <a href="{% url 'article_view' article.pk %}" class="btn-solid theme-primary">Подробнее</a>
-                            <a role="button" href="{% url 'article_update' article.pk %}"
+                            <a href="{% url 'webapp:article_view' article.pk %}" class="btn-solid theme-primary">Подробнее</a>
+                            <a role="button" href="{% url 'webapp:article_update' article.pk %}"
                                class="btn-solid theme-success">Обновить</a>
                             <a role="button"
-                               href="{% url 'article_delete' article.pk %}"
+                               href="{% url 'webapp:article_delete' article.pk %}"
                                class="btn-solid theme-danger">Удалить</a>
                         </div>
                     </div>
