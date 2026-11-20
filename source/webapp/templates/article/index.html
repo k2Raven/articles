@@ -25,11 +25,15 @@
                         <h4 class="card-title">{{ article.title }}</h4>
                         <div>
                             <a href="{% url 'webapp:article_view' article.pk %}" class="btn-solid theme-primary">Подробнее</a>
+                            {% if perms.webapp.change_article or article.author == request.user %}
                             <a role="button" href="{% url 'webapp:article_update' article.pk %}"
                                class="btn-solid theme-success">Обновить</a>
+                            {% endif %}
+                            {% if perms.webapp.delete_article %}
                             <a role="button"
                                href="{% url 'webapp:article_delete' article.pk %}"
                                class="btn-solid theme-danger">Удалить</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 from urllib.parse import urlencode
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -62,20 +62,29 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     form_class = ArticleForm
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse('webapp:article_view', kwargs={'pk': self.object.pk})
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'article/update.html'
     model = Article
     form_class = ArticleForm
+    permission_required = 'webapp.change_article'
+
+    def has_permission(self):
+        return super().has_permission() or self.get_object().author == self.request.user
 
     def get_success_url(self):
         return reverse('webapp:article_view', kwargs={'pk': self.object.pk})
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'article/delete.html'
     model = Article
     success_url = reverse_lazy('webapp:article_list')
+    permission_required = 'webapp.delete_article'
