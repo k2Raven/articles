@@ -45,7 +45,7 @@
                     <a class="btn-solid btn-styled theme-success me-3" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" role="button">Войти</a>
                     <a class="btn-solid btn-styled theme-success" href="{% url 'accounts:register' %}?next={{ request.get_full_path }}" role="button">Зарегистрироваться</a>
                 {% else %}
-                    <p class="navbar-text">Добро пожаловать, {{ request.user }}!</p>
+                    <a href="{% url 'accounts:detail' request.user.pk %}" class="navbar-text">Добро пожаловать, {{ request.user }}!</a>
                     <form action="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" method="post" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn-solid btn-styled theme-success">Выйти</button>

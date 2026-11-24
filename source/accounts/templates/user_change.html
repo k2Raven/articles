@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование профиля{% endblock %}
+
+
+{% block content %}
+    <h1>Редактирование профиля пользователя {{ user_object.get_full_name|default:user_object.username }}</h1>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'partial/form.html' with fields_only=True %}
+    {% include 'partial/form.html' with fields_only=True form=profile_form %}
+    <button type="submit" class="btn-solid theme-accent">Изменить</button>
+    </form>
+{% endblock %}
