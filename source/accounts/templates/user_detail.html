@@ -8,7 +8,7 @@
                         <a class="nav-link" href="{% url 'accounts:change' user_object.pk %}">Редактировать профиль</a>
 </li>
 <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:password_change' user_object.pk %}">Сменить пароль</a>
+                        <a class="nav-link" href="{% url 'accounts:password_change' %}">Сменить пароль</a>
 </li>
     {% endif %}
 {% endblock %}
