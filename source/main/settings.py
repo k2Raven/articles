@@ -33,7 +33,6 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -76,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
@@ -90,7 +88,6 @@ DATABASES = {
         'PORT': env('DATABASE_PORT', default=''),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
@@ -122,25 +119,31 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
 MAILERS = {
     'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
+        "OPTIONS": {
+            "host": env('EMAIL_HOST', default='localhost'),
+            "port": env('EMAIL_PORT', default=25),
+            'username': env('EMAIL_HOST_USER', default=''),
+            'password': env('EMAIL_HOST_PASSWORD', default=''),
+            "use_tls": True,
+        },
     },
 }
 
+DEFAULT_FROM_EMAIL = env("EMAIL_HOST_USER", default="")
+
 LOGIN_REDIRECT_URL = 'webapp:article_list'
 LOGOUT_REDIRECT_URL = 'webapp:article_list'
-
 
 MEDIA_ROOT = BASE_DIR / 'uploads'
 
