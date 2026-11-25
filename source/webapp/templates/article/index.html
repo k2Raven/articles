@@ -7,41 +7,6 @@
 {% block content %}
     <h1>Articles</h1>
 
-    <div class="my-3">
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
-        {% endif %}
-    </div>
-
-    <div class="row row-cols-3">
-
-        {% for article in articles %}
-            <div class="col mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        Author: {{ article.author }}
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">{{ article.title }}</h4>
-                        <div>
-                            <a href="{% url 'article_view' article.pk %}" class="btn-solid theme-primary">Подробнее</a>
-                            <a role="button" href="{% url 'article_update' article.pk %}"
-                               class="btn-solid theme-success">Обновить</a>
-                            <a role="button"
-                               href="{% url 'article_delete' article.pk %}"
-                               class="btn-solid theme-danger">Удалить</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="my-3">
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
-        {% endif %}
-    </div>
+{% include 'partial/article_list.html' %}
 
 {% endblock %}

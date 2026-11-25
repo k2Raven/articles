@@ -16,17 +16,22 @@
             <p class="card-text fg-1">content: {{ article.content }}</p>
             <small class="fg-2">author: {{ article.author }}</small>
             <div>
-                <a role="button" href="{% url 'article_update' article.pk %}"
+                {% if perms.webapp.change_article or article.author == request.user  %}
+                <a role="button" href="{% url 'webapp:article_update' article.pk %}"
                    class="btn-solid theme-success">Обновить</a>
+                {% endif %}
+                {% if perms.webapp.delete_article %}
                 <a role="button"
-                   href="{% url 'article_delete' article.pk %}"
+                   href="{% url 'webapp:article_delete' article.pk %}"
                    class="btn-solid theme-danger">Удалить</a>
+                {% endif %}
             </div>
         </div>
     </div>
 
     <h3 class="my-4">Comments</h3>
-    <a role="button" href="{% url 'comment_create' article.pk %}" class="btn-solid theme-primary my-3">Add Comment</a>
+        <a role="button" href="{% url 'webapp:comment_create' article.pk %}" class="btn-solid theme-primary my-3">Add Comment</a>
+
 
     <div class="row  row-cols-3">
     {% for comment in comments %}
@@ -36,11 +41,15 @@
                     <p class="card-text">{{ comment.text }}</p>
                     <small class="fg-2">author: {{ comment.author }}</small>
                     <div>
-                        <a role="button" href="{% url 'comment_update' comment.pk %}"
+                        {% if perms.webapp.change_comment %}
+                        <a role="button" href="{% url 'webapp:comment_update' comment.pk %}"
                            class="btn-solid theme-success">Обновить</a>
+                        {% endif %}
+                        {% if perms.webapp.delete_comment %}
                         <a role="button"
-                           href="{% url 'comment_delete' comment.pk %}"
+                           href="{% url 'webapp:comment_delete' comment.pk %}"
                            class="btn-solid theme-danger">Удалить</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

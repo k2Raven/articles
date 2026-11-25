@@ -18,7 +18,7 @@
 <body data-bs-theme="light">
 <nav class="navbar md:navbar-expand bg-1">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'article_list' %}">Статьи</a>
+        <a class="navbar-brand" href="{% url 'webapp:article_list' %}">Статьи</a>
         <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarDrawer"
                 aria-controls="navbarDrawer" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" aria-hidden="true"></span>
@@ -31,21 +31,22 @@
             <div class="drawer-body mb-2 md:mb-0">
                 <ul class="nav navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'article_list' %}">Домой</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'webapp:article_list' %}">Домой</a>
                     </li>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'article_create' %}">Создать статью</a>
+                        <a class="nav-link" href="{% url 'webapp:article_create' %}">Создать статью</a>
                     </li>
                 {% endif %}
                     {% block menu %}{% endblock %}
                 </ul>
                 {% block search %}{% endblock %}
                 {% if not request.user.is_authenticated %}
-                    <a class="btn-solid btn-styled theme-success" href="{% url 'login' %}" role="button">Войти</a>
+                    <a class="btn-solid btn-styled theme-success me-3" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" role="button">Войти</a>
+                    <a class="btn-solid btn-styled theme-success" href="{% url 'accounts:register' %}?next={{ request.get_full_path }}" role="button">Зарегистрироваться</a>
                 {% else %}
-                    <p class="navbar-text">Добро пожаловать, {{ request.user }}!</p>
-                    <form action="{% url 'logout' %}" method="post" class="d-inline">
+                    <a href="{% url 'accounts:detail' request.user.pk %}" class="navbar-text">Добро пожаловать, {{ request.user }}!</a>
+                    <form action="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" method="post" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn-solid btn-styled theme-success">Выйти</button>
                     </form>
